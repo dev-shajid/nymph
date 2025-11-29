@@ -31,11 +31,11 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-linear-to-br from-background via-background to-[#0a1929]"
+      className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-background"
     >
       <>
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
+          className="absolute top-1/8 left-1/2 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -43,24 +43,12 @@ export function HeroSection() {
           transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
+          className="absolute top-1/8 right-1/2 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
           }}
           transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
-        />
-
-        {/* Gradient Orbs */}
-        <motion.div
-          className="absolute top-10 left-10 w-96 h-96 rounded-full bg-linear-to-br from-accent/15 to-red-500/5 blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-linear-to-br from-red-500/15 to-accent/50 blur-3xl"
-          animate={{ x: [0, -40, 0], y: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
 
         {/* Grid pattern overlay */}
@@ -77,12 +65,12 @@ export function HeroSection() {
         >
           {/* Badge */}
           <motion.div variants={itemVariants} style={{ y: y2 }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 hover:bg-white/10 transition-colors cursor-default">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-md mb-8 hover:bg-foreground/10 transition-colors cursor-default">
               <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-600 dark:bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              <span className="text-xs font-medium tracking-wide text-gray-300 uppercase">Globally Trusted Partner</span>
+              <span className="text-xs font-medium tracking-wide text-foreground/70 uppercase">Globally Trusted Partner</span>
             </div>
           </motion.div>
 
