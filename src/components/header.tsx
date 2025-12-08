@@ -7,6 +7,7 @@ import { Menu, MoonIcon, SunIcon, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
+import Logo from "./logo"
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -32,17 +33,12 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent",
+        isScrolled ? "bg-background/80 pt-0 backdrop-blur-lg border-b border-border" : "bg-transparent pt-4",
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative">
-              <span className="text-2xl font-bold text-primary">nymph</span>
-              <span className="text-xs text-muted-foreground tracking-widest block -mt-1">solutions</span>
-            </div>
-          </Link>
+          <Logo/>
 
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Logo from "./logo"
 
 const footerLinks = {
   services: [
@@ -22,11 +23,8 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8 md:gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-2xl font-bold text-primary">nymph</span>
-              <span className="text-xs text-muted-foreground tracking-widest block -mt-1">solutions</span>
-            </Link>
-            <p className="text-muted-foreground max-w-sm leading-relaxed">
+            <Logo className="w-[100px]" />
+            <p className="text-muted-foreground mt-4 max-w-sm leading-relaxed">
               A globally trusted software development company empowering businesses with cutting-edge technology
               solutions.
             </p>

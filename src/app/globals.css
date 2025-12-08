@@ -119,8 +119,10 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   html {
@@ -132,20 +134,24 @@
 
 /* Custom animations for hero section */
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse-glow {
+
   0%,
   100% {
     opacity: 0.4;
   }
+
   50% {
     opacity: 0.8;
   }
@@ -155,6 +161,7 @@
   0% {
     background-position: 0% 0%;
   }
+
   100% {
     background-position: 100% 100%;
   }
@@ -165,6 +172,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -175,6 +183,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -186,13 +195,16 @@
     transform: scaleX(0);
     transform-origin: left;
   }
+
   50% {
     transform: scaleX(1);
     transform-origin: left;
   }
+
   50.01% {
     transform-origin: right;
   }
+
   100% {
     transform: scaleX(0);
     transform-origin: right;
@@ -200,16 +212,20 @@
 }
 
 @keyframes blob {
+
   0%,
   100% {
     transform: scale(1) rotate(0deg);
   }
+
   25% {
     transform: scale(1.02) rotate(1deg);
   }
+
   50% {
     transform: scale(1) rotate(0deg);
   }
+
   75% {
     transform: scale(0.98) rotate(-1deg);
   }
