@@ -1,3 +1,7 @@
+'use client'
+
+import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -7,14 +11,17 @@ interface LogoProps {
 }
 
 export default function Logo({className}:LogoProps) {
+  const { theme } = useTheme()
   return (
     <Link href='/'>
         <Image
-            src='/logo.webp'
+            src={theme === 'light' ? '/logo-light.svg' : '/logo-dark.svg'}
             alt='Logo'
             width={150}
             height={100}
-            className={className}
+            className={cn(
+              className,
+            )}
         />
 
     </Link>

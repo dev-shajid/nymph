@@ -35,7 +35,7 @@ export function HeroSection() {
     >
       <>
         <motion.div
-          className="absolute top-1/8 left-1/2 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
+          className="absolute top-1/8 left-1/2 w-96 h-96 dark:bg-primary/50 bg-primary/30 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -43,7 +43,7 @@ export function HeroSection() {
           transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/8 right-1/2 w-96 h-96 bg-primary/50 rounded-full blur-3xl"
+          className="absolute top-1/8 right-1/2 w-96 h-96 dark:bg-primary/50 bg-primary/20 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -54,8 +54,6 @@ export function HeroSection() {
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.09)_1px,transparent_1px)] bg-size-[64px_64px]" />
       </>
-
-      {/* Gradient Overlay */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -74,7 +72,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-foreground leading-tight mb-6">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

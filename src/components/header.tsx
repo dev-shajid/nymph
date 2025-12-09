@@ -45,7 +45,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-base text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -73,8 +73,7 @@ export function Header() {
 
           <div className="hidden md:flex items-center gap-4">
             <Button
-              variant="outline"
-              className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 bg-transparent"
+              className="text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-transparent border border-foreground"
             >
               Let's Talk
             </Button>

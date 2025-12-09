@@ -178,7 +178,7 @@ function ServiceCard({ service }: { service: (typeof services)[0] }) {
         {service.title}
       </h3>
       <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+      <div className="absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
     </motion.div>
   )
 }

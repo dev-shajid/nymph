@@ -43,9 +43,7 @@ export function AboutSection() {
           >
             <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">About Us</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-              Where deep tech meets
-              <br />
-              <span className="text-muted-foreground">a human mindset.</span>
+              Where deep tech meets a human mindset.
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
               We are a collective of curious and passionate technologists bound together by our deep tech knowledge, our

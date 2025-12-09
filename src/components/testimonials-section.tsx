@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Quote } from "lucide-react"
+import Image from "next/image"
 
 const testimonials = [
   {
@@ -12,6 +13,7 @@ const testimonials = [
     author: "Sarah Chen",
     role: "CTO, TechForward Inc.",
     company: "TechForward",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces",
   },
   {
     quote:
@@ -19,6 +21,7 @@ const testimonials = [
     author: "Michael Rodriguez",
     role: "Director of Digital, RetailMax",
     company: "RetailMax",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces",
   },
   {
     quote:
@@ -26,6 +29,7 @@ const testimonials = [
     author: "Emily Watson",
     role: "VP Operations, GlobalTrade",
     company: "GlobalTrade",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces",
   },
 ]
 
@@ -74,7 +78,17 @@ export function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Client Logos - Infinite Marquee */}
         <div className="mb-16 relative">
-          <p className="text-center text-muted-foreground text-sm mb-8">Trusted by innovative companies worldwide</p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="sm:text-2xl text-2xl font-bold text-center text-foreground mb-6 text-balance"
+          >
+            Trusted by innovative companies worldwide
+            <br className="hidden md:block" />
+            companies worldwide
+          </motion.h2>
           <div className="flex overflow-hidden mask-image-linear-gradient">
             <motion.div
               className="flex gap-12 md:gap-24 items-center whitespace-nowrap"
@@ -98,11 +112,12 @@ export function TestimonialsSection() {
         </div>
 
         {/* Testimonials */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="text-primary font-medium tracking-wider uppercase text-sm mb-4"
           >
             Testimonials
@@ -111,11 +126,22 @@ export function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-bold text-foreground text-balance"
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance"
           >
-            What our clients say about us
+            Hear from those who've experienced
+            <br className="hidden md:block" />
+            our commitment to excellence
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty"
+          >
+            Discover how we've helped businesses achieve their goals through innovative solutions and dedicated partnership.
+          </motion.p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 perspective-1000">
@@ -124,11 +150,21 @@ export function TestimonialsSection() {
               key={testimonial.author}
               className="p-6 md:p-8 rounded-xl bg-card border border-border h-full"
             >
-              <Quote className="h-8 w-8 text-primary/30 mb-4" />
+              <Quote className="h-8 w-8 text-primary/50 mb-4" />
               <p className="text-foreground leading-relaxed mb-6">"{testimonial.quote}"</p>
-              <div>
-                <p className="font-semibold text-foreground">{testimonial.author}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+              <div className="flex items-center gap-4">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+                  <Image
+                    src={testimonial.avatar}
+                    alt={testimonial.author}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">{testimonial.author}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
               </div>
             </TiltCard>
           ))}
