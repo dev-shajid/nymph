@@ -114,21 +114,19 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base group"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 md:px-8 md:py-6 text-base group sm:w-40! md:w-48!"
               asChild
             >
               <Link href="#contact">
                 Get Started
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button
-              size="lg"
               variant="outline"
-              className="border-border text-foreground hover:bg-secondary px-8 py-6 text-base bg-transparent"
+              className="border-border text-foreground hover:bg-secondary md:px-8 md:py-6 text-base bg-transparent sm:w-40! md:w-48!"
               asChild
-            >
+              >
               <Link href="#services">Explore Services</Link>
             </Button>
           </motion.div>
