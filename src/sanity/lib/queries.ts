@@ -47,7 +47,7 @@ export async function getStats(): Promise<Stat[]> {
     order
   }`
 
-  return client.fetch(query)
+  return client.fetch(query, {}, { cache: 'no-store' })
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
@@ -67,7 +67,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     isActive
   }`
 
-  return client.fetch(query)
+  return client.fetch(query, {}, { cache: 'no-store' })
 }
 
 export async function getClientLogos(): Promise<ClientLogo[]> {
@@ -85,5 +85,5 @@ export async function getClientLogos(): Promise<ClientLogo[]> {
     isActive
   }`
 
-  return client.fetch(query)
+  return client.fetch(query, {}, { cache: 'no-store' })
 }
