@@ -1,0 +1,89 @@
+import { client } from './client'
+
+export interface Stat {
+  _id: string
+  value: number
+  suffix?: string
+  label: string
+  order: number
+}
+
+export interface Testimonial {
+  _id: string
+  quote: string
+  author: string
+  role: string
+  company: string
+  avatar: {
+    asset: {
+      _id: string
+      url: string
+    }
+  }
+  order: number
+  isActive: boolean
+}
+
+export interface ClientLogo {
+  _id: string
+  name: string
+  logoType: 'text' | 'image'
+  logoImage?: {
+    asset: {
+      _id: string
+      url: string
+    }
+  }
+  order: number
+  isActive: boolean
+}
+
+export async function getStats(): Promise<Stat[]> {
+  const query = `*[_type == "stat"] | order(order asc) {
+    _id,
+    value,
+    suffix,
+    label,
+    order
+  }`
+
+  return client.fetch(query)
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const query = `*[_type == "testimonial" && isActive == true] | order(order asc) {
+    _id,
+    quote,
+    author,
+    role,
+    company,
+    avatar {
+      asset-> {
+        _id,
+        url
+      }
+    },
+    order,
+    isActive
+  }`
+
+  return client.fetch(query)
+}
+
+export async function getClientLogos(): Promise<ClientLogo[]> {
+  const query = `*[_type == "clientLogo" && isActive == true] | order(order asc) {
+    _id,
+    name,
+    logoType,
+    logoImage {
+      asset-> {
+        _id,
+        url
+      }
+    },
+    order,
+    isActive
+  }`
+
+  return client.fetch(query)
+}

@@ -2,20 +2,14 @@
 import { useRef, useEffect } from "react"
 import { useInView, useMotionValue, useSpring } from "framer-motion"
 import { cn } from "@/lib/utils"
-
-const stats = [
-  { value: 150, suffix: "+", label: "Projects Delivered" },
-  { value: 8, suffix: "+", label: "Years Experience" },
-  { value: 50, suffix: "+", label: "Happy Clients" },
-  { value: 15, suffix: "+", label: "Countries Served" },
-]
+import type { Stat } from "@/sanity/lib/queries"
 
 function AnimatedCounter({
   value,
   suffix,
 }: {
   value: number
-  suffix: string
+  suffix?: string
 }) {
   const ref = useRef<HTMLSpanElement>(null)
   const motionValue = useMotionValue(0)
@@ -34,7 +28,7 @@ function AnimatedCounter({
   useEffect(() => {
     return springValue.on("change", (latest) => {
       if (ref.current) {
-        ref.current.textContent = Math.floor(latest).toString() + suffix
+        ref.current.textContent = Math.floor(latest).toString() + (suffix || '')
       }
     })
   }, [springValue, suffix])
@@ -42,7 +36,9 @@ function AnimatedCounter({
   return <span ref={ref} />
 }
 
-export function StatsSection() {
+export function StatsSection({ stats }: { stats: Stat[] }) {
+  if (!stats || stats.length === 0) return null
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

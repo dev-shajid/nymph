@@ -5,35 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Quote } from "lucide-react"
 import Image from "next/image"
-
-const testimonials = [
-  {
-    quote:
-      "Nymph Solutions transformed our business operations with their AI-powered analytics platform. Their team's expertise and dedication exceeded our expectations.",
-    author: "Sarah Chen",
-    role: "CTO, TechForward Inc.",
-    company: "TechForward",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces",
-  },
-  {
-    quote:
-      "The mobile app they developed for us has become central to our customer engagement strategy. Outstanding quality and seamless user experience.",
-    author: "Michael Rodriguez",
-    role: "Director of Digital, RetailMax",
-    company: "RetailMax",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces",
-  },
-  {
-    quote:
-      "Their blockchain solution revolutionized our supply chain transparency. Professional, innovative, and always delivering on time.",
-    author: "Emily Watson",
-    role: "VP Operations, GlobalTrade",
-    company: "GlobalTrade",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces",
-  },
-]
-
-const clientLogos = ["TechForward", "RetailMax", "GlobalTrade", "InnovateCo", "DataDrive", "CloudFirst"]
+import type { Testimonial, ClientLogo } from "@/sanity/lib/queries"
 
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
   const x = useMotionValue(0)
@@ -72,44 +44,65 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
   )
 }
 
-export function TestimonialsSection() {
+export function TestimonialsSection({
+  testimonials,
+  clientLogos,
+}: {
+  testimonials: Testimonial[]
+  clientLogos: ClientLogo[]
+}) {
+  if (!testimonials || testimonials.length === 0) return null
+
   return (
     <section id="testimonials" className="py-24 md:py-32 bg-secondary/30 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Client Logos - Infinite Marquee */}
-        <div className="mb-16 relative">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="sm:text-2xl text-2xl font-bold text-center text-foreground mb-6 text-balance"
-          >
-            Trusted by innovative companies worldwide
-            <br className="hidden md:block" />
-            companies worldwide
-          </motion.h2>
-          <div className="flex overflow-hidden mask-image-linear-gradient">
-            <motion.div
-              className="flex gap-12 md:gap-24 items-center whitespace-nowrap"
-              animate={{ x: [0, -1000] }}
-              transition={{
-                repeat: Infinity,
-                duration: 30,
-                ease: "linear",
-              }}
+        {clientLogos && clientLogos.length > 0 && (
+          <div className="mb-16 relative">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="sm:text-2xl text-2xl font-bold text-center text-foreground mb-6 text-balance"
             >
-              {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
-                <div
-                  key={`${logo}-${index}`}
-                  className="text-xl md:text-2xl font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-default"
-                >
-                  {logo}
-                </div>
-              ))}
-            </motion.div>
+              Trusted by innovative companies worldwide
+            </motion.h2>
+            <div className="flex overflow-hidden mask-image-linear-gradient">
+              <motion.div
+                className="flex gap-12 md:gap-24 items-center whitespace-nowrap"
+                animate={{ x: [0, -1000] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 30,
+                  ease: "linear",
+                }}
+              >
+                {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
+                  <div
+                    key={`${logo.name}-${index}`}
+                    className="flex items-center"
+                  >
+                    {logo.logoType === 'image' && logo.logoImage?.asset?.url ? (
+                      <div className="relative h-8 md:h-10 w-24 md:w-32 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all">
+                        <Image
+                          src={logo.logoImage.asset.url}
+                          alt={logo.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-xl md:text-2xl font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-default">
+                        {logo.name}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Testimonials */}
         <div className="text-center mb-16">
@@ -147,15 +140,15 @@ export function TestimonialsSection() {
         <div className="grid md:grid-cols-3 gap-6 perspective-1000">
           {testimonials.map((testimonial, index) => (
             <TiltCard
-              key={testimonial.author}
+              key={testimonial._id}
               className="p-6 md:p-8 rounded-xl bg-card border border-border h-full"
             >
               <Quote className="h-8 w-8 text-primary/50 mb-4" />
-              <p className="text-foreground leading-relaxed mb-6">"{testimonial.quote}"</p>
+              <p className="text-foreground leading-relaxed mb-6">&quot;{testimonial.quote}&quot;</p>
               <div className="flex items-center gap-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src={testimonial.avatar}
+                    src={testimonial.avatar?.asset?.url || "/placeholder-avatar.png"}
                     alt={testimonial.author}
                     fill
                     className="object-cover"
