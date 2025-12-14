@@ -3,13 +3,12 @@ import Logo from "./logo"
 
 const footerLinks = {
   services: [
-    { label: "AI & ML Development", href: "#services" },
+    { label: "Augmented Engineering", href: "#services" },
     { label: "Mobile & Web Development", href: "#services" },
-    { label: "Cloud Applications", href: "#services" },
-    { label: "Blockchain Development", href: "#services" },
+    { label: "AI & ML Development", href: "#services" },
+    { label: "Enterprise Solutions", href: "#services" },
   ],
   company: [
-    { label: "About Us", href: "#about" },
     { label: "Our Values", href: "#about" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "Contact", href: "#contact" },

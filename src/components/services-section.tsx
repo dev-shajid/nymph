@@ -15,14 +15,13 @@ import {
   Settings,
   Headphones,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const services = [
   {
-    icon: Brain,
-    title: "AI & ML Development",
+    icon: Settings,
+    title: "Augmented Engineering",
     description:
-      "Build intelligent solutions with machine learning for data analysis, prediction, and natural language processing.",
+      "Advanced technologies like AI, machine learning, and data analytics to enhance engineering capabilities.",
   },
   {
     icon: Smartphone,
@@ -31,38 +30,22 @@ const services = [
       "Create seamless mobile apps for iOS and Android, plus modern web applications using cutting-edge frameworks.",
   },
   {
-    icon: Cloud,
-    title: "Cloud Application Development",
+    icon: Brain,
+    title: "AI & ML Development",
     description:
-      "Build cloud-native applications leveraging AWS, Azure, or Google Cloud for scalability and flexibility.",
-  },
-  {
-    icon: Cpu,
-    title: "Embedded & IoT Systems",
-    description: "Develop software solutions focusing on efficient embedded technology for IoT devices and automation.",
-  },
-  {
-    icon: Link2,
-    title: "Blockchain Development",
-    description: "Create decentralized applications (DApps) with smart contracts and secure blockchain solutions.",
-  },
-  {
-    icon: Shield,
-    title: "Cyber Security",
-    description:
-      "Provide threat prevention services to safeguard against evolving digital threats and ensure robust network protection.",
-  },
-  {
-    icon: Code,
-    title: "Custom Software Development",
-    description:
-      "Deliver tailored software solutions, developing custom applications and systems for specific business needs.",
+      "Build intelligent solutions with machine learning for data analysis, prediction, and natural language processing.",
   },
   {
     icon: Layers,
     title: "Enterprise Solutions",
     description:
       "Develop large-scale enterprise software, integrating business processes, data management, and communication.",
+  },
+  {
+    icon: Code,
+    title: "Custom Software Development",
+    description:
+      "Deliver tailored software solutions, developing custom applications and systems for specific business needs.",
   },
   {
     icon: Palette,
@@ -75,15 +58,31 @@ const services = [
     description: "Comprehensive automation and manual testing to ensure software reliability and performance.",
   },
   {
-    icon: Settings,
-    title: "Augmented Engineering",
+    icon: Shield,
+    title: "Cyber Security",
     description:
-      "Advanced technologies like AI, machine learning, and data analytics to enhance engineering capabilities.",
+      "Provide threat prevention services to safeguard against evolving digital threats and ensure robust network protection.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Application Development",
+    description:
+      "Build cloud-native applications leveraging AWS, Azure, or Google Cloud for scalability and flexibility.",
   },
   {
     icon: Headphones,
     title: "Maintenance & Support",
     description: "Ongoing support, updates, troubleshooting, and continuous optimization for your applications.",
+  },
+  {
+    icon: Cpu,
+    title: "Embedded & IoT Systems",
+    description: "Develop software solutions focusing on efficient embedded technology for IoT devices and automation.",
+  },
+  {
+    icon: Link2,
+    title: "Blockchain Development",
+    description: "Create decentralized applications (DApps) with smart contracts and secure blockchain solutions.",
   },
 ]
 

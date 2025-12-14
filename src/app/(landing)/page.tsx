@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { ServicesSection } from "@/components/services-section"
+import { CareersSection } from "@/components/careers-section"
 import { AboutSection } from "@/components/about-section"
 import { StatsSection } from "@/components/stats-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
@@ -20,6 +21,7 @@ export default async function HomePage() {
             <Header />
             <HeroSection />
             <ServicesSection />
+            <CareersSection />
             <AboutSection />
             <StatsSection stats={stats} />
             <TestimonialsSection testimonials={testimonials} clientLogos={clientLogos} />
