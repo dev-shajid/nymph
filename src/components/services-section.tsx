@@ -79,11 +79,7 @@ const services = [
     title: "Embedded & IoT Systems",
     description: "Develop software solutions focusing on efficient embedded technology for IoT devices and automation.",
   },
-  {
-    icon: Link2,
-    title: "Blockchain Development",
-    description: "Create decentralized applications (DApps) with smart contracts and secure blockchain solutions.",
-  },
+  
 ]
 
 const containerVariants = {

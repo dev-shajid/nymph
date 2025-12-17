@@ -31,7 +31,7 @@ export function AboutSection() {
   const isInView = useInView(sectionRef, { threshold: 0.2 })
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 md:py-32 bg-secondary/30">
+    <section id="about" ref={sectionRef} className="py-24 md:py-32 bg-secondary/30 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
@@ -42,15 +42,15 @@ export function AboutSection() {
             )}
           >
             <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">About Us</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight wrap-break-words">
               Where deep tech meets a human mindset.
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6 wrap-break-words">
               We are a collective of curious and passionate technologists bound together by our deep tech knowledge, our
               human-centric mindset, and a passion for using technology and digital solutions to drive business
               transformation.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed wrap-break-words">
               At Nymph Solutions, we combine technical expertise with creative problem-solving to deliver solutions that
               truly make a difference. Our team of experts works closely with clients to understand their unique
               challenges and craft tailored solutions that drive measurable results.
@@ -65,7 +65,7 @@ export function AboutSection() {
                 <div
                   key={value.title}
                   className={cn(
-                    "p-6 rounded-xl bg-card border border-border transition-all duration-700",
+                    "p-6 rounded-xl bg-card border border-border transition-all duration-700 overflow-hidden",
                     isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
                   )}
                   style={{
@@ -76,9 +76,9 @@ export function AboutSection() {
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">{value.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-xl font-semibold text-foreground mb-2 wrap-break-words">{value.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed wrap-break-words">{value.description}</p>
                     </div>
                   </div>
                 </div>
