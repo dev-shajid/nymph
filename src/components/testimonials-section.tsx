@@ -69,27 +69,43 @@ export function TestimonialsSection({
               Trusted by innovative companies worldwide
             </motion.h2>
             <Marquee pauseOnHover className="[--duration:30s] [--gap:3rem] mask-image-linear-gradient">
-              {clientLogos.map((logo) => (
-                <div
-                  key={logo.name}
-                  className="flex items-center"
-                >
-                  {logo.logoType === 'image' && logo.logoImage?.asset?.url ? (
-                    <div className="relative h-8 md:h-10 w-24 md:w-32 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all">
-                      <Image
-                        src={logo.logoImage.asset.url}
-                        alt={logo.name}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <span className="text-xl md:text-2xl font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-default">
-                      {logo.name}
-                    </span>
-                  )}
-                </div>
-              ))}
+              {clientLogos.map((logo) => {
+                const hasImage = !!logo.logoImage?.asset?.url
+                const hasText = logo.showText
+
+                // Skip if neither image nor text is available
+                if (!hasImage && !hasText) return null
+
+                return (
+                  <div
+                    key={logo.name}
+                    className="flex items-center gap-2"
+                  >
+                    {/* Image appears first (prefix) if it exists */}
+                    {hasImage && (
+                      <div className="relative h-8 md:h-10 w-auto max-w-24 md:max-w-32 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all shrink-0">
+                        <Image
+                          src={logo.logoImage!.asset.url}
+                          alt={logo.name}
+                          width={96}
+                          height={40}
+                          className="object-contain h-8 md:h-10 w-auto"
+                        />
+                      </div>
+                    )}
+
+                    {/* Text appears after image if enabled */}
+                    {hasText && (
+                      <span className={cn(
+                        "font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-default whitespace-nowrap",
+                        hasImage ? "text-lg md:text-xl font-semibold" : "text-xl md:text-2xl"
+                      )}>
+                        {logo.name}
+                      </span>
+                    )}
+                  </div>
+                )
+              })}
             </Marquee>
           </div>
         )}

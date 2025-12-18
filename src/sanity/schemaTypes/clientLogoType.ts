@@ -12,36 +12,20 @@ export const clientLogoType = defineType({
             validation: (Rule) => Rule.required().max(100),
         }),
         defineField({
-            name: 'logoType',
-            title: 'Logo Type',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Text Only', value: 'text' },
-                    { title: 'Image', value: 'image' },
-                ],
-                layout: 'radio',
-            },
-            initialValue: 'text',
-            validation: (Rule) => Rule.required(),
-        }),
-        defineField({
             name: 'logoImage',
-            title: 'Logo Image',
+            title: 'Logo Image (Optional)',
             type: 'image',
-            description: 'Upload company logo image',
+            description: 'Upload company logo image. If provided with company name, image will appear before text.',
             options: {
                 hotspot: true,
             },
-            hidden: ({ parent }) => parent?.logoType !== 'image',
-            validation: (Rule) =>
-                Rule.custom((logoImage, context) => {
-                    const logoType = (context.parent as any)?.logoType
-                    if (logoType === 'image' && !logoImage) {
-                        return 'Logo image is required when logo type is Image'
-                    }
-                    return true
-                }),
+        }),
+        defineField({
+            name: 'showText',
+            title: 'Show Company Name',
+            type: 'boolean',
+            description: 'Display the company name as text alongside or instead of the logo',
+            initialValue: true,
         }),
         defineField({
             name: 'order',
@@ -69,16 +53,18 @@ export const clientLogoType = defineType({
     preview: {
         select: {
             name: 'name',
-            logoType: 'logoType',
             logoImage: 'logoImage',
+            showText: 'showText',
             order: 'order',
             isActive: 'isActive',
         },
-        prepare({ name, logoType, logoImage, order, isActive }) {
+        prepare({ name, logoImage, showText, order, isActive }) {
+            const hasImage = !!logoImage
+            const typeEmoji = hasImage && showText ? '🖼️📝' : hasImage ? '🖼️' : '📝'
             return {
                 title: name,
-                subtitle: `${logoType === 'image' ? '🖼️ Image' : '📝 Text'} - Order: ${order}${!isActive ? ' (Inactive)' : ''}`,
-                media: logoType === 'image' ? logoImage : undefined,
+                subtitle: `${typeEmoji} - Order: ${order}${!isActive ? ' (Inactive)' : ''}`,
+                media: logoImage,
             }
         },
     },

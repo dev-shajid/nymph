@@ -27,13 +27,13 @@ export interface Testimonial {
 export interface ClientLogo {
   _id: string
   name: string
-  logoType: 'text' | 'image'
   logoImage?: {
     asset: {
       _id: string
       url: string
     }
   }
+  showText: boolean
   order: number
   isActive: boolean
 }
@@ -74,13 +74,13 @@ export async function getClientLogos(): Promise<ClientLogo[]> {
   const query = `*[_type == "clientLogo" && isActive == true] | order(order asc) {
     _id,
     name,
-    logoType,
     logoImage {
       asset-> {
         _id,
         url
       }
     },
+    showText,
     order,
     isActive
   }`
