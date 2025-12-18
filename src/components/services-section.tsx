@@ -5,81 +5,62 @@ import {
   Brain,
   Smartphone,
   Cloud,
-  Cpu,
-  Link2,
   Shield,
   Code,
   Layers,
   Palette,
-  CheckCircle,
-  Settings,
-  Headphones,
+  Database,
 } from "lucide-react"
 
 const services = [
   {
-    icon: Settings,
-    title: "Augmented Engineering",
+    icon: Code,
+    title: "Software Development",
     description:
-      "Advanced technologies like AI, machine learning, and data analytics to enhance engineering capabilities.",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile & Web Development",
-    description:
-      "Create seamless mobile apps for iOS and Android, plus modern web applications using cutting-edge frameworks.",
+      "Design and build scalable, high-performance software tailored to complex business requirements.",
   },
   {
     icon: Brain,
-    title: "AI & ML Development",
+    title: "AI & ML Engineering",
     description:
-      "Build intelligent solutions with machine learning for data analysis, prediction, and natural language processing.",
+      "Develop production-grade AI/ML systems for automation, intelligence, analytics, and decision-making.",
   },
   {
-    icon: Layers,
-    title: "Enterprise Solutions",
+    icon: Smartphone,
+    title: "Web & Mobile Applications",
     description:
-      "Develop large-scale enterprise software, integrating business processes, data management, and communication.",
-  },
-  {
-    icon: Code,
-    title: "Custom Software Development",
-    description:
-      "Deliver tailored software solutions, developing custom applications and systems for specific business needs.",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Offer user-centric design and intuitive UX development for engaging digital experiences.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Quality Assurance & Testing",
-    description: "Comprehensive automation and manual testing to ensure software reliability and performance.",
-  },
-  {
-    icon: Shield,
-    title: "Cyber Security",
-    description:
-      "Provide threat prevention services to safeguard against evolving digital threats and ensure robust network protection.",
+      "Create modern, secure, and performant web and mobile apps using cutting-edge frameworks.",
   },
   {
     icon: Cloud,
-    title: "Cloud Application Development",
+    title: "Cloud & DevOps Solutions",
     description:
-      "Build cloud-native applications leveraging AWS, Azure, or Google Cloud for scalability and flexibility.",
+      "Build and operate cloud-native systems with robust CI/CD, scalability, and cost efficiency.",
   },
   {
-    icon: Headphones,
-    title: "Maintenance & Support",
-    description: "Ongoing support, updates, troubleshooting, and continuous optimization for your applications.",
+    icon: Layers,
+    title: "Enterprise Systems & Integrations",
+    description:
+      "Architect and integrate large-scale enterprise platforms, APIs, and data pipelines.",
   },
   {
-    icon: Cpu,
-    title: "Embedded & IoT Systems",
-    description: "Develop software solutions focusing on efficient embedded technology for IoT devices and automation.",
+    icon: Database,
+    title: "Data Engineering & Analytics",
+    description:
+      "Design reliable data platforms for ingestion, processing, analytics, and AI readiness.",
   },
-  
+  {
+    icon: Palette,
+    title: "UI/UX & Product Design",
+    description:
+      "Deliver intuitive, user-centric designs focused on usability, performance, and business impact.",
+  },
+  {
+    icon: Shield,
+    title: "Quality, Security & Reliability",
+    description:
+      "Ensure software excellence through automated testing, security best practices, and performance optimization.",
+  },
 ]
 
 const containerVariants = {

@@ -103,7 +103,7 @@ export function HeroSection() {
             variants={itemVariants}
             className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed text-balance"
           >
-            Empowering businesses with cutting-edge AI, Cloud, Blockchain, and Custom Software Solutions that drive
+            Empowering businesses with cutting-edge AI, Cloud, and Custom Software Solutions that drive
             <span className="text-foreground font-medium"> digital transformation</span>.
           </motion.p>
 

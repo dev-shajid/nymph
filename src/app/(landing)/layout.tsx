@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Nymph Solutions | Future-Ready Software Development",
-  description: "A globally trusted software development company specializing in AI/ML, Cloud, Blockchain, IoT, and Custom Software Solutions.",
+  description: "A globally trusted software development company specializing in AI/ML, Cloud, IoT, and Custom Software Solutions.",
 }
 
 export default function RootLayout({
