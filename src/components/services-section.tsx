@@ -14,48 +14,56 @@ import {
 
 const services = [
   {
+    id: "software-development",
     icon: Code,
     title: "Software Development",
     description:
       "Design and build scalable, high-performance software tailored to complex business requirements.",
   },
   {
+    id: "ai-ml-engineering",
     icon: Brain,
     title: "AI & ML Engineering",
     description:
       "Develop production-grade AI/ML systems for automation, intelligence, analytics, and decision-making.",
   },
   {
+    id: "web-mobile-applications",
     icon: Smartphone,
     title: "Web & Mobile Applications",
     description:
       "Create modern, secure, and performant web and mobile apps using cutting-edge frameworks.",
   },
   {
+    id: "cloud-devops-solutions",
     icon: Cloud,
     title: "Cloud & DevOps Solutions",
     description:
       "Build and operate cloud-native systems with robust CI/CD, scalability, and cost efficiency.",
   },
   {
+    id: "enterprise-systems-integrations",
     icon: Layers,
     title: "Enterprise Systems & Integrations",
     description:
       "Architect and integrate large-scale enterprise platforms, APIs, and data pipelines.",
   },
   {
+    id: "data-engineering-analytics",
     icon: Database,
     title: "Data Engineering & Analytics",
     description:
       "Design reliable data platforms for ingestion, processing, analytics, and AI readiness.",
   },
   {
+    id: "ui-ux-product-design",
     icon: Palette,
     title: "UI/UX & Product Design",
     description:
       "Deliver intuitive, user-centric designs focused on usability, performance, and business impact.",
   },
   {
+    id: "quality-security-reliability",
     icon: Shield,
     title: "Quality, Security & Reliability",
     description:
@@ -127,8 +135,8 @@ export function ServicesSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} />
+          {services.map((service) => (
+            <ServiceCard key={service.id} service={service} />
           ))}
         </motion.div>
       </div>
@@ -141,9 +149,11 @@ function ServiceCard({ service }: { service: (typeof services)[0] }) {
 
   return (
     <motion.div
+      id={service.id}
       variants={itemVariants}
       whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
       className="group relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 cursor-pointer"
+      style={{ scrollMarginTop: '6rem' }}
     >
       <div className="mb-4">
         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

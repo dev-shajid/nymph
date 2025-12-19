@@ -157,7 +157,7 @@ export function TestimonialsSection({
                     src={testimonial.avatar?.asset?.url || "/placeholder-avatar.png"}
                     alt={testimonial.author}
                     fill
-                    className="object-cover"
+                    objectFit="cover"
                   />
                 </div>
                 <div>

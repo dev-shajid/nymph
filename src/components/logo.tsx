@@ -17,7 +17,7 @@ export default function Logo({className}:LogoProps) {
         <Image
             src={theme === 'light' ? '/logo-light.svg' : '/logo-dark.svg'}
             alt='Logo'
-            width={150}
+            width={120}
             height={100}
             className={cn(
               className,
