@@ -47,7 +47,8 @@ export async function getStats(): Promise<Stat[]> {
     order
   }`
 
-  return client.fetch(query, {}, { cache: 'no-store' })
+  // Use force-cache for permanent caching
+  return client.fetch(query, {}, { cache: 'force-cache', next: { tags: ['stat'] } })
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
@@ -67,7 +68,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     isActive
   }`
 
-  return client.fetch(query, {}, { cache: 'no-store' })
+  return client.fetch(query, {}, { cache: 'force-cache', next: { tags: ['testimonial'] } })
 }
 
 export async function getClientLogos(): Promise<ClientLogo[]> {
@@ -85,5 +86,5 @@ export async function getClientLogos(): Promise<ClientLogo[]> {
     isActive
   }`
 
-  return client.fetch(query, {}, { cache: 'no-store' })
+  return client.fetch(query, {}, { cache: 'force-cache', next: { tags: ['clientLogo'] } })
 }
