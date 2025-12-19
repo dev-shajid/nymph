@@ -8,8 +8,9 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "./ui/t
 import Logo from "./logo"
 import { motion } from "framer-motion"
 import { Dock, DockIcon } from "./ui/dock"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo, useCallback } from "react"
 import Link from "next/link"
+import React from "react"
 
 const navLinks = [
   { href: "#services", label: "Services", icon: Briefcase },
@@ -19,31 +20,32 @@ const navLinks = [
   { href: "#contact", label: "Contact", icon: Mail },
 ]
 
+const MemoDockIcon = React.memo(DockIcon)
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const { setTheme, theme } = useTheme()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-
-      // Detect active section
-      const sections = navLinks.map(link => link.href.replace('#', ''))
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(`#${section}`)
-            break
-          }
+  const sections = useMemo(() => navLinks.map(link => link.href.replace('#', '')), [])
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 50)
+    for (const section of sections) {
+      const element = document.getElementById(section)
+      if (element) {
+        const rect = element.getBoundingClientRect()
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          setActiveSection(`#${section}`)
+          break
         }
       }
     }
+  }, [sections])
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [handleScroll])
 
   return (
     <>
@@ -137,7 +139,7 @@ export function Header() {
               const Icon = link.icon
               const isActive = activeSection === link.href
               return (
-                <DockIcon key={link.href}>
+                <MemoDockIcon key={link.href}>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Link
@@ -157,7 +159,7 @@ export function Header() {
                       <p>{link.label}</p>
                     </TooltipContent>
                   </Tooltip>
-                </DockIcon>
+                </MemoDockIcon>
               )
             })}
 
