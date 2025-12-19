@@ -53,25 +53,6 @@ export function CareersSection() {
 
     return (
         <section className="relative py-24 md:py-32 overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-liear-to-b from-background via-primary/5 to-background" />
-            <motion.div
-                className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            />
-            <motion.div
-                className="absolute bottom-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
-                animate={{
-                    scale: [1.2, 1, 1.2],
-                    opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            />
-
             <div className="container relative z-10 mx-auto px-4">
                 <motion.div
                     initial="hidden"

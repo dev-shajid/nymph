@@ -1,20 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { MoonIcon, SunIcon, Briefcase, Users, Home, Mail } from "lucide-react"
+import { MoonIcon, SunIcon, Briefcase, Users, Home, Mail, TrendingUp, MessageSquareQuoteIcon, InfoIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "./ui/tooltip"
 import Logo from "./logo"
 import { motion } from "framer-motion"
 import { Dock, DockIcon } from "./ui/dock"
+import { useEffect, useState } from "react"
+import Link from "next/link"
 
 const navLinks = [
   { href: "#services", label: "Services", icon: Briefcase },
-  { href: "#about", label: "About", icon: Users },
-  { href: "#testimonials", label: "Clients", icon: Home },
+  { href: "#careers", label: "Careers", icon: TrendingUp },
+  { href: "#about", label: "About", icon: InfoIcon },
+  { href: "#testimonials", label: "Testimonials", icon: MessageSquareQuoteIcon },
   { href: "#contact", label: "Contact", icon: Mail },
 ]
 
