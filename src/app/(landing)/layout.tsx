@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Poppins } from 'next/font/google';
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,9 +31,13 @@ export default function RootLayout({
         suppressContentEditableWarning
         className={`${poppins.variable} antialiased`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <SidebarProvider>
+          <SidebarInset>
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+          </SidebarInset>
+        </SidebarProvider>
       </body>
     </html>
   );
