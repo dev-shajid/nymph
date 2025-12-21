@@ -108,11 +108,7 @@ export function Header() {
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="flex items-center justify-between h-16 px-4">
           <Logo />
-          <SidebarTrigger>
-            <Button variant="ghost" size="icon">
-              <TextAlignEnd className="h-5 w-5" />
-            </Button>
-          </SidebarTrigger>
+          <SidebarTrigger/>
           <AppSidebar menuItems={navLinks} activeSection={activeSection} />
         </div>
       </header>
