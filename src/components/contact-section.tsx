@@ -82,7 +82,14 @@ export function ContactSection() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="text-foreground wrap-break-words">Level 3, House No. 470, Road No. 31, Mohakhali DOHS, Dhaka, Bangladesh.</p>
+                  <a
+                    href="https://maps.app.goo.gl/rUGrqveMNWLNKQX68?g_st=iw"
+                    className="text-foreground wrap-break-words hover:text-primary transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Level 3, House No. 470, Road No. 31, Mohakhali DOHS, Dhaka, Bangladesh.
+                  </a>
                 </div>
               </div>
             </div>

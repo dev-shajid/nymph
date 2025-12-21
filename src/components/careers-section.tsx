@@ -52,7 +52,7 @@ export function CareersSection() {
     }
 
     return (
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section id='careers' className="relative py-24 md:py-32 overflow-hidden">
             <div className="container relative z-10 mx-auto px-4">
                 <motion.div
                     initial="hidden"
