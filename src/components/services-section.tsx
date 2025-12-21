@@ -12,6 +12,8 @@ import {
   Database,
 } from "lucide-react"
 
+import { useServiceHoverStore } from "../hooks/use-service-hover-store"
+
 const services = [
   {
     id: "software-development",
@@ -92,6 +94,57 @@ const itemVariants = {
   },
 }
 
+
+// Move ServiceCard above ServicesSection to avoid hoisting issues
+type ServiceType = typeof services[number]
+
+function ServiceCard({ service }: { service: ServiceType }) {
+  const Icon = service.icon
+  const activeServiceId = useServiceHoverStore((s: { activeServiceId: string | null }) => s.activeServiceId)
+  const isActive = activeServiceId === service.id
+
+  return (
+    <motion.div
+      id={service.id}
+      variants={itemVariants}
+      whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+      animate={isActive ? { scale: 1.05 } : undefined}
+      className={
+        [
+          "group relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 cursor-pointer",
+          isActive ? "border-primary/50" : "",
+        ].join(" ")
+      }
+      style={{ scrollMarginTop: '6rem' }}
+    >
+      <div className="mb-4">
+        <div className={[
+          "w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-colors",
+          "group-hover:bg-primary/20",
+          isActive ? "bg-primary/20" : ""
+        ].join(" ")}
+        >
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+      </div>
+      <h3 className={[
+        "text-lg font-semibold text-foreground mb-2 transition-colors group-hover:text-primary",
+        isActive ? "text-primary" : ""
+      ].join(" ")}
+      >
+        {service.title}
+      </h3>
+      <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+      <div className={[
+        "absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity pointer-events-none",
+        "group-hover:opacity-100",
+        isActive ? "opacity-100" : ""
+      ].join(" ")}
+      />
+    </motion.div>
+  )
+}
+
 export function ServicesSection() {
   return (
     <section id="services" className="py-24 md:py-32 bg-background">
@@ -144,27 +197,49 @@ export function ServicesSection() {
   )
 }
 
-function ServiceCard({ service }: { service: (typeof services)[0] }) {
-  const Icon = service.icon
+// function ServiceCard({ service }: { service: ServiceType }) {
+//   const Icon = service.icon
+//   const activeServiceId = useServiceHoverStore((s) => s.activeServiceId)
+//   const isActive = activeServiceId === service.id
 
-  return (
-    <motion.div
-      id={service.id}
-      variants={itemVariants}
-      whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-      className="group relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 cursor-pointer"
-      style={{ scrollMarginTop: '6rem' }}
-    >
-      <div className="mb-4">
-        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-          <Icon className="h-6 w-6 text-primary" />
-        </div>
-      </div>
-      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-        {service.title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-      <div className="absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-    </motion.div>
-  )
-}
+//   return (
+//     <motion.div
+//       id={service.id}
+//       variants={itemVariants}
+//       whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+//       animate={isActive ? { scale: 1.05 } : undefined}
+//       className={
+//         [
+//           "group relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 cursor-pointer",
+//           isActive ? "border-primary/50" : "",
+//         ].join(" ")
+//       }
+//       style={{ scrollMarginTop: '6rem' }}
+//     >
+//       <div className="mb-4">
+//         <div className={[
+//           "w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-colors",
+//           "group-hover:bg-primary/20",
+//           isActive ? "bg-primary/20" : ""
+//         ].join(" ")}
+//         >
+//           <Icon className="h-6 w-6 text-primary" />
+//         </div>
+//       </div>
+//       <h3 className={[
+//         "text-lg font-semibold text-foreground mb-2 transition-colors group-hover:text-primary",
+//         isActive ? "text-primary" : ""
+//       ].join(" ")}
+//       >
+//         {service.title}
+//       </h3>
+//       <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+//       <div className={[
+//         "absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity pointer-events-none",
+//         "group-hover:opacity-100",
+//         isActive ? "opacity-100" : ""
+//       ].join(" ")}
+//       />
+//     </motion.div>
+//   )
+// }

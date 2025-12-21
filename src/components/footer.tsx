@@ -1,5 +1,8 @@
+'use client'
+
 import Link from "next/link"
 import Logo from "./logo"
+import { useServiceHoverStore } from "../hooks/use-service-hover-store"
 
 const footerLinks = {
   services: [
@@ -16,6 +19,23 @@ const footerLinks = {
 }
 
 export function Footer() {
+  const setActiveServiceId = useServiceHoverStore((s) => s.setActiveServiceId)
+
+  // Map footer link label to service id in services-section
+  const labelToId: Record<string, string> = {
+    "Software Development": "software-development",
+    "AI & ML Engineering": "ai-ml-engineering",
+    "Web & Mobile Applications": "web-mobile-applications",
+    "Cloud & DevOps Solutions": "cloud-devops-solutions",
+  }
+
+  function handleServiceClick(label: string) {
+    const id = labelToId[label]
+    if (!id) return
+    setActiveServiceId(id)
+    setTimeout(() => setActiveServiceId(null), 2500)
+  }
+
   return (
     <footer className="pt-16 md:pt-20 pb-24 md:pb-4 bg-secondary/30 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,6 +58,7 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    onClick={() => handleServiceClick(link.label)}
                   >
                     {link.label}
                   </Link>

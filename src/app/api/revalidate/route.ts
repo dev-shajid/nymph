@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     console.log({tag})
 
     if (tag) {
-        await revalidateTag(tag, {})
+        revalidateTag(tag, {})
         return NextResponse.json({ revalidated: true, tag })
     }
 
