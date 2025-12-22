@@ -10,23 +10,11 @@ export function HeroSection() {
   // Parallax effect for text
   const sectionRef = useRef<HTMLElement>(null)
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  })
-
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100])
-
   const itemVariants = {
     hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
+    visible: { y: 0, opacity: 1, },
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
 
   return (
     <section
@@ -62,7 +50,7 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           {/* Badge */}
-          <motion.div variants={itemVariants} style={{ y: y2 }}>
+          <motion.div variants={itemVariants}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-md mb-8 hover:bg-foreground/10 transition-colors cursor-default">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-600 dark:bg-green-400 opacity-75"></span>
@@ -126,7 +114,7 @@ export function HeroSection() {
               variant="outline"
               className="border-border text-foreground hover:bg-secondary md:px-8 md:py-6 text-base bg-transparent sm:w-40! md:w-48!"
               asChild
-              >
+            >
               <Link href="#services">Explore Services</Link>
             </Button>
           </motion.div>
