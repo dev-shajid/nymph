@@ -59,7 +59,7 @@ export function Header() {
               <Logo />
             </div>
 
-            <nav className="flex items-center gap-8">
+            <nav className="flex items-center lg:gap-8 gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
