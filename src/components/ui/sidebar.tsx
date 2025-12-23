@@ -275,7 +275,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <TextAlignEnd size={5} />
+      <TextAlignEnd className="size-5" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
