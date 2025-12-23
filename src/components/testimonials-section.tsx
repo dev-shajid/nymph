@@ -1,6 +1,8 @@
 "use client"
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { FadeInUp } from "@/components/ui/fade-in-up"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
 import { Quote } from "lucide-react"
 import Image from "next/image"
@@ -10,24 +12,19 @@ import type { Testimonial, ClientLogo } from "@/sanity/lib/queries"
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-
   const mouseX = useSpring(x, { stiffness: 500, damping: 100 })
   const mouseY = useSpring(y, { stiffness: 500, damping: 100 })
-
   function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
     const { left, top, width, height } = currentTarget.getBoundingClientRect()
     x.set(clientX - left - width / 2)
     y.set(clientY - top - height / 2)
   }
-
   function onMouseLeave() {
     x.set(0)
     y.set(0)
   }
-
   const rotateX = useTransform(mouseY, [-300, 300], [5, -5])
   const rotateY = useTransform(mouseX, [-300, 300], [-5, 5])
-
   return (
     <motion.div
       className={className}
@@ -144,29 +141,40 @@ export function TestimonialsSection({
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 perspective-1000">
-          {testimonials.map((testimonial, index) => (
-            <TiltCard
-              key={testimonial._id}
-              className="p-6 md:p-8 rounded-xl bg-card border border-border h-full"
-            >
-              <Quote className="h-8 w-8 text-primary/50 mb-4" />
-              <p className="text-foreground leading-relaxed mb-6">&quot;{testimonial.quote}&quot;</p>
-              <div className="flex items-center gap-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
-                  <Image
-                    src={testimonial.avatar?.asset?.url || "/placeholder-avatar.png"}
-                    alt={testimonial.author}
-                    fill
-                    objectFit="cover"
-                  />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-            </TiltCard>
-          ))}
+          {(() => {
+            const isMobile = useIsMobile();
+            return testimonials.map((testimonial, index) => {
+              const content = (
+                <>
+                  <Quote className="h-8 w-8 text-primary/50 mb-4" />
+                  <p className="text-foreground leading-relaxed mb-6">&quot;{testimonial.quote}&quot;</p>
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+                      <Image
+                        src={testimonial.avatar?.asset?.url || "/placeholder-avatar.png"}
+                        alt={testimonial.author}
+                        fill
+                        objectFit="cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">{testimonial.author}</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </>
+              );
+              return isMobile ? (
+                <FadeInUp key={testimonial._id} className="p-6 md:p-8 rounded-xl bg-card border border-border h-full">
+                  {content}
+                </FadeInUp>
+              ) : (
+                <TiltCard key={testimonial._id} className="p-6 md:p-8 rounded-xl bg-card border border-border h-full">
+                  {content}
+                </TiltCard>
+              );
+            });
+          })()}
         </div>
       </div>
     </section>
