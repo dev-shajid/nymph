@@ -13,31 +13,19 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-background"
+      className="relative flex items-center overflow-hidden bg-background py-24"
     >
       <>
-        <motion.div
-          className="absolute top-1/8 left-1/2 w-96 h-96 dark:bg-primary/50 bg-primary/30 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/8 right-1/2 w-96 h-96 dark:bg-primary/50 bg-primary/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.5, 0.3, 0.5],
-          }}
-          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
-        />
+        <div
+          className="absolute top-1/8 left-1/2 size-90 dark:bg-primary/25 bg-primary/30 rounded-full blur-3xl"/>
+        <div
+          className="absolute top-1/8 right-1/2 size-90 dark:bg-primary/25 bg-primary/20 rounded-full blur-3xl"/>
 
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.09)_1px,transparent_1px)] bg-size-[64px_64px]" />
       </>
 
-      <div className="relative z-10 max-w-7xl mx-auto mt-12 px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <>
           {/* Badge */}
           <FadeInUp>

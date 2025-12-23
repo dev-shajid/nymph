@@ -76,11 +76,11 @@ export function TestimonialsSection({
                 return (
                   <div
                     key={logo.name}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 group/logo cursor-pointer"
                   >
                     {/* Image appears first (prefix) if it exists */}
                     {hasImage && (
-                      <div className="relative h-8 md:h-10 w-auto max-w-24 md:max-w-32 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all shrink-0">
+                      <div className="relative h-8 md:h-10 w-auto max-w-24 md:max-w-32 grayscale opacity-50 transition-all shrink-0 group-hover/logo:grayscale-0 group-hover/logo:opacity-100">
                         <Image
                           src={logo.logoImage!.asset.url}
                           alt={logo.name}
@@ -94,7 +94,7 @@ export function TestimonialsSection({
                     {/* Text appears after image if enabled */}
                     {hasText && (
                       <span className={cn(
-                        "font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-default whitespace-nowrap",
+                        "font-bold text-muted-foreground/50 transition-colors whitespace-nowrap group-hover/logo:text-muted-foreground",
                         hasImage ? "text-lg md:text-xl font-semibold" : "text-xl md:text-2xl"
                       )}>
                         {logo.name}

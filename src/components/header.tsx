@@ -49,7 +49,7 @@ export function Header() {
       {/* Top Header - Desktop */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden md:block",
+          "sticky top-0 left-0 right-0 z-50 transition-all hidden md:block",
           isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent",
         )}
       >
@@ -89,7 +89,7 @@ export function Header() {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Toggle Theme</p>
+                  <p>{theme === "light" ? "Dark Mode" : "Light Mode"}</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -105,8 +105,8 @@ export function Header() {
       </header>
 
       {/* Mobile Header - Logo and CTA */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-        <div className="flex items-center justify-between h-16 px-4">
+      <header className="md:hidden sticky top-0 left-0 right-0 z-15 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div className="flex items-center justify-between h-16 p-4">
           <Logo />
           <SidebarTrigger/>
           <AppSidebar menuItems={navLinks} activeSection={activeSection} />
