@@ -15,12 +15,31 @@ export function ContactSection() {
   const isInView = useInView(sectionRef, { threshold: 0.2 })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const form = sectionRef.current?.querySelector("form") as HTMLFormElement
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      await fetch('https://playground.attensys.ai/webhook/send-email-nymph', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: (form.elements.namedItem('name') as HTMLInputElement).value,
+          email: (form.elements.namedItem('email') as HTMLInputElement).value,
+          company: (form.elements.namedItem('company') as HTMLInputElement).value,
+          message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      console.error("Error sending email:", error);
+    }
     setIsSubmitting(false)
     setIsSubmitted(true)
   }
@@ -104,73 +123,83 @@ export function ContactSection() {
             style={{ transitionDelay: "200ms" }}
           >
             <div className="p-6 md:p-8 rounded-xl bg-card border border-border overflow-hidden">
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Send className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
-                  <p className="text-muted-foreground">Thank you for reaching out. We'll get back to you shortly.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
+              {isSubmitted ?
+                status == "success" ?
+                  (
+                    <div className="text-center py-12">
+                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                        <Send className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
+                      <p className="text-muted-foreground">Thank you for reaching out. We'll get back to you shortly.</p>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                        <Send className="h-8 w-8 text-red-500" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Submission Failed</h3>
+                      <p className="text-muted-foreground">Oops! Something went wrong. Please try again later.</p>
+                    </div>
+                  ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                          Name
+                        </label>
+                        <Input
+                          id="name"
+                          placeholder="Your name"
+                          required
+                          className="bg-input border-border focus:border-primary"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                          Email
+                        </label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="you@company.com"
+                          required
+                          className="bg-input border-border focus:border-primary"
+                        />
+                      </div>
+                    </div>
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Name
+                      <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
+                        Company
                       </label>
                       <Input
-                        id="name"
-                        placeholder="Your name"
-                        required
+                        id="company"
+                        placeholder="Your company name"
                         className="bg-input border-border focus:border-primary"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                        Message
                       </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="you@company.com"
+                      <Textarea
+                        id="message"
+                        placeholder="Tell us about your project..."
+                        rows={5}
                         required
-                        className="bg-input border-border focus:border-primary"
+                        className="bg-input border-border focus:border-primary resize-none"
                       />
                     </div>
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
-                      Company
-                    </label>
-                    <Input
-                      id="company"
-                      placeholder="Your company name"
-                      className="bg-input border-border focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your project..."
-                      rows={5}
-                      required
-                      className="bg-input border-border focus:border-primary resize-none"
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              )}
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </Button>
+                  </form>
+                )}
             </div>
           </div>
         </div>

@@ -140,7 +140,7 @@ export function TestimonialsSection({
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 perspective-1000">
+        <div className="flex flex-wrap justify-center gap-6 perspective-1000">
           {(() => {
             const isMobile = useIsMobile();
             return testimonials.map((testimonial, index) => {
@@ -165,11 +165,11 @@ export function TestimonialsSection({
                 </>
               );
               return isMobile ? (
-                <FadeInUp key={testimonial._id} className="p-6 md:p-8 rounded-xl bg-card border border-border h-full">
+                <FadeInUp key={testimonial._id} className="w-full md:w-[320px] lg:w-[360px] xl:w-[380px] p-6 md:p-8 rounded-xl bg-card border border-border flex flex-col transform-3d">
                   {content}
                 </FadeInUp>
               ) : (
-                <TiltCard key={testimonial._id} className="p-6 md:p-8 rounded-xl bg-card border border-border h-full">
+                <TiltCard key={testimonial._id} className="w-full md:w-[320px] lg:w-[360px] xl:w-[380px] p-6 md:p-8 rounded-xl bg-card border border-border flex flex-col transform-3d">
                   {content}
                 </TiltCard>
               );
