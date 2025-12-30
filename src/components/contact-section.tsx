@@ -122,7 +122,7 @@ export function ContactSection() {
             )}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="p-6 md:p-8 rounded-xl bg-card border border-border overflow-hidden">
+            <div className="p-6 md:p-8 rounded-xl bg-card border border-border overflow-hidden max-w-xl w-full mx-auto">
               {isSubmitted ?
                 status == "success" ?
                   (
@@ -142,7 +142,7 @@ export function ContactSection() {
                       <p className="text-muted-foreground">Oops! Something went wrong. Please try again later.</p>
                     </div>
                   ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6 w-full">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -152,7 +152,7 @@ export function ContactSection() {
                           id="name"
                           placeholder="Your name"
                           required
-                          className="bg-input border-border focus:border-primary"
+                          className="bg-input border-border focus:border-primary w-full"
                         />
                       </div>
                       <div>
@@ -164,7 +164,7 @@ export function ContactSection() {
                           type="email"
                           placeholder="you@company.com"
                           required
-                          className="bg-input border-border focus:border-primary"
+                          className="bg-input border-border focus:border-primary w-full"
                         />
                       </div>
                     </div>
@@ -175,7 +175,7 @@ export function ContactSection() {
                       <Input
                         id="company"
                         placeholder="Your company name"
-                        className="bg-input border-border focus:border-primary"
+                        className="bg-input border-border focus:border-primary w-full"
                       />
                     </div>
                     <div>
@@ -187,7 +187,7 @@ export function ContactSection() {
                         placeholder="Tell us about your project..."
                         rows={5}
                         required
-                        className="bg-input border-border focus:border-primary resize-none"
+                        className="bg-input border-border focus:border-primary resize-none w-full"
                       />
                     </div>
                     <Button
