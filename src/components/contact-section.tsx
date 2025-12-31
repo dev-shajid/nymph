@@ -9,6 +9,26 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+
+const formSchema = z.object({
+  name: z.string().min(2).max(50),
+  email: z.email("Invalid input: expected a valid email address"),
+  company: z.string().max(100).optional(),
+  message: z.string().min(5).max(1000),
+})
+
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -17,28 +37,32 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const form = sectionRef.current?.querySelector("form") as HTMLFormElement
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      company: "",
+      message: "",
+    },
+  })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     try {
-      await fetch('https://playground.attensys.ai/webhook/send-email-nymph', {
+      const url = process.env.NEXT_PUBLIC_EMAIL_API_URL;
+      if (!url) throw new Error("Email API URL is not defined");
+      await fetch(url, {
         method: 'POST',
-        body: JSON.stringify({
-          name: (form.elements.namedItem('name') as HTMLInputElement).value,
-          email: (form.elements.namedItem('email') as HTMLInputElement).value,
-          company: (form.elements.namedItem('company') as HTMLInputElement).value,
-          message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
-        }),
+        body: JSON.stringify(values),
         headers: { 'Content-Type': 'application/json' },
       });
 
       setStatus("success");
-      form.reset();
     } catch (error) {
       setStatus("error");
-      console.error("Error sending email:", error);
+      alert(`Failed to send message: ${error instanceof Error ? error.message : String(error)}`);
     }
     setIsSubmitting(false)
     setIsSubmitted(true)
@@ -142,68 +166,77 @@ export function ContactSection() {
                       <p className="text-muted-foreground">Oops! Something went wrong. Please try again later.</p>
                     </div>
                   ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6 w-full">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                          Name
-                        </label>
-                        <Input
-                          id="name"
-                          placeholder="Your name"
-                          required
-                          className="bg-input border-border focus:border-primary w-full"
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Your name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email</FormLabel>
+                              <FormControl>
+                                <Input type="email" placeholder="you@company.com" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
                       </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                          Email
-                        </label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="you@company.com"
-                          required
-                          className="bg-input border-border focus:border-primary w-full"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
-                        Company
-                      </label>
-                      <Input
-                        id="company"
-                        placeholder="Your company name"
-                        className="bg-input border-border focus:border-primary w-full"
+                      <FormField
+                        control={form.control}
+                        name="company"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Company</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Your company name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                        Message
-                      </label>
-                      <Textarea
-                        id="message"
-                        placeholder="Tell us about your project..."
-                        rows={5}
-                        required
-                        className="bg-input border-border focus:border-primary resize-none w-full"
+                      <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Message</FormLabel>
+                            <FormControl>
+                              <Textarea placeholder="Tell us about your project..." rows={5} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
-                    </div>
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </Button>
-                  </form>
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                      </Button>
+                    </form>
+                  </Form>
                 )}
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
